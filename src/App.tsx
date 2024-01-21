@@ -19,8 +19,7 @@ const App: FC = () => {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-size: ${({ theme }) => theme.fontSize.regular};
-    font-family: ${({ theme }) => theme.fontFamily.text};
+    font-family: ${({ theme }) => theme.fontFamily};
   }
 `;
 
