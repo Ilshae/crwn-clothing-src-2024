@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FC, Suspense } from "react";
+import Loading from "./common/Loading.tsx";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "./theme.ts";
+import Main from "./pages/main/Main.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Suspense fallback={<Loading />}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Wrapper>
+          <Main />
+        </Wrapper>
+      </ThemeProvider>
+    </Suspense>
+  );
+};
 
-export default App
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-size: ${({ theme }) => theme.fontSize.regular};
+    font-family: ${({ theme }) => theme.fontFamily.text};
+  }
+`;
+
+const Wrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+export default App;
