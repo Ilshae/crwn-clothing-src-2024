@@ -2,7 +2,11 @@ import { FC, Suspense } from "react";
 import Loading from "./common/Loading.tsx";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme.ts";
-import Main from "./pages/main/Main.tsx";
+import Main from "./routes/main/Main.tsx";
+import { Route, Routes } from "react-router-dom";
+import ErrorBoundary from "./common/ErrorBoundary.tsx";
+import Shop from "./routes/shop/Shop.tsx";
+import Navigation from "./routes/navigation/Navigation.tsx";
 
 const App: FC = () => {
   return (
@@ -10,7 +14,24 @@ const App: FC = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Wrapper>
-          <Main />
+          <Routes>
+            <Route
+              path={"/"}
+              element={<Navigation />}
+              errorElement={<ErrorBoundary />}
+            >
+              <Route
+                index
+                element={<Main />}
+                errorElement={<ErrorBoundary />}
+              />
+              <Route
+                path={"shop"}
+                element={<Shop />}
+                errorElement={<ErrorBoundary />}
+              />
+            </Route>
+          </Routes>
         </Wrapper>
       </ThemeProvider>
     </Suspense>
@@ -20,6 +41,7 @@ const App: FC = () => {
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.fontFamily};
+    box-sizing: border-box;
   }
 `;
 
