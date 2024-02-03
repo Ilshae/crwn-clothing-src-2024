@@ -1,12 +1,13 @@
 import { FC, Suspense } from "react";
-import Loading from "./common/Loading.tsx";
+import Loading from "./common/loading/Loading.tsx";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme.ts";
 import Main from "./routes/main/Main.tsx";
 import { Route, Routes } from "react-router-dom";
-import ErrorBoundary from "./common/ErrorBoundary.tsx";
+import ErrorBoundary from "./common/error-boundary/ErrorBoundary.tsx";
 import Shop from "./routes/shop/Shop.tsx";
 import Navigation from "./routes/navigation/Navigation.tsx";
+import Auth from "./routes/authentication/Auth.tsx";
 
 const App: FC = () => {
   return (
@@ -28,6 +29,11 @@ const App: FC = () => {
               <Route
                 path={"shop"}
                 element={<Shop />}
+                errorElement={<ErrorBoundary />}
+              />
+              <Route
+                path={"auth"}
+                element={<Auth />}
                 errorElement={<ErrorBoundary />}
               />
             </Route>
