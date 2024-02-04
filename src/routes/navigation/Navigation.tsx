@@ -1,7 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { FC, useContext } from "react";
+import { UserContext } from "../../contexts/user.tsx";
+import { signOutUser } from "../../utils/firebase/utils.ts";
 
-const Navigation = () => {
+const Navigation: FC = () => {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   return (
     <>
       <NavWrapper>
@@ -10,7 +20,13 @@ const Navigation = () => {
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
-          <NavLink to="/auth">SIGN IN</NavLink>
+          {currentUser ? (
+            <SignOut onClick={async () => await signOutHandler()}>
+              SIGN OUT
+            </SignOut>
+          ) : (
+            <NavLink to="/auth">SIGN IN</NavLink>
+          )}
         </NavLinks>
       </NavWrapper>
       <Outlet />
@@ -43,6 +59,13 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+`;
+
+const SignOut = styled.span`
   padding: 10px 15px;
   cursor: pointer;
   text-decoration: none;

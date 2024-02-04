@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -6,6 +6,7 @@ import {
 import FormInput from "../../common/form-input/FormInput.tsx";
 import styled from "styled-components";
 import Button from "../../common/button/Button.tsx";
+import { UserContext } from "../../contexts/user.tsx";
 
 const defForm = {
   displayName: "",
@@ -17,6 +18,8 @@ const defForm = {
 const SignUp = () => {
   const [form, setForm] = useState(defForm);
   const { displayName, email, password, confirmPassword } = form;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setForm(defForm);
@@ -37,7 +40,13 @@ const SignUp = () => {
     }
 
     try {
-      const user = await createAuthUserWithEmailAndPassword(email, password);
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password,
+      );
+
+      setCurrentUser(user);
+
       await createUserDocumentFromAuth(user, { displayName });
       await resetFormFields();
     } catch (error) {
