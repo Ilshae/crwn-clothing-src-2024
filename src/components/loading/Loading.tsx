@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const Loading = () => {
   return (
-    <Wrapper>
+    <Container>
       <Spinner />
-    </Wrapper>
+    </Container>
   );
 };
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;

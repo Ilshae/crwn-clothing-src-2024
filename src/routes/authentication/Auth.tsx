@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 const Auth = () => {
   return (
-    <Wrapper>
+    <Container>
       <SignIn />
       <SignUp />
-    </Wrapper>
+    </Container>
   );
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   width: 900px;
   justify-content: space-between;

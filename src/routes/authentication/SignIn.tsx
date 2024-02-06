@@ -3,8 +3,8 @@ import {
   signInWithGooglePopup,
 } from "../../utils/firebase/utils.ts";
 import { ChangeEvent, FormEvent, useState } from "react";
-import FormInput from "../../common/form-input/FormInput.tsx";
-import Button from "../../common/button/Button.tsx";
+import FormInput from "../../components/form-input/FormInput.tsx";
+import Button from "../../components/button/Button.tsx";
 import styled from "styled-components";
 
 const defForm = {
@@ -53,7 +53,7 @@ const SignIn = () => {
   };
 
   return (
-    <Wrapper>
+    <Container>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form
@@ -78,7 +78,7 @@ const SignIn = () => {
           onChange={(event) => handleChange(event)}
         />
       </form>
-      <ButtonWrapper>
+      <ButtonContainer>
         <Button type={"submit"}>Sign In</Button>
         <Button
           type={"button"}
@@ -87,12 +87,12 @@ const SignIn = () => {
         >
           Google sign in
         </Button>
-      </ButtonWrapper>
-    </Wrapper>
+      </ButtonContainer>
+    </Container>
   );
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 380px;
@@ -102,7 +102,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;

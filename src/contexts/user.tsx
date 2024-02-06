@@ -4,7 +4,6 @@ import {
   onAuthStateChangedListener,
 } from "../utils/firebase/utils.ts";
 
-// as the actual value you want to access
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: (user: string | null) => null,

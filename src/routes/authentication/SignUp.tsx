@@ -3,9 +3,9 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/utils.ts";
-import FormInput from "../../common/form-input/FormInput.tsx";
+import FormInput from "../../components/form-input/FormInput.tsx";
 import styled from "styled-components";
-import Button from "../../common/button/Button.tsx";
+import Button from "../../components/button/Button.tsx";
 
 const defForm = {
   displayName: "",
@@ -53,7 +53,7 @@ const SignUp = () => {
   };
 
   return (
-    <Wrapper>
+    <Container>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form
@@ -96,11 +96,11 @@ const SignUp = () => {
 
         <Button type={"submit"}>Sign Up</Button>
       </form>
-    </Wrapper>
+    </Container>
   );
 };
 
-const Wrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 380px;

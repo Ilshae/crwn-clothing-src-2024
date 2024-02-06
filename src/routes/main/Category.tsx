@@ -6,13 +6,13 @@ const Category: FC<{ title: string; imageUrl: string }> = ({
   imageUrl,
 }) => {
   return (
-    <Wrapper>
+    <Container>
       <BackgroundImage $imageUrl={imageUrl} />
       <Card>
         <h2>{title}</h2>
         <p>Shop Now</p>
       </Card>
-    </Wrapper>
+    </Container>
   );
 };
 
@@ -52,7 +52,7 @@ export const Card = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   min-width: 30%;
   height: 380px;
   flex: 1 1 auto;

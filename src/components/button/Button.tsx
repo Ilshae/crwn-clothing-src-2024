@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, FC } from "react";
 
-import { Wrapper } from "../loading/Loading.tsx";
+import { Container } from "../loading/Loading.tsx";
 import styled from "styled-components";
 
 export enum BUTTON_TYPE_CLASSES {
@@ -85,7 +85,7 @@ export const InvertedButton = styled(BaseButton)`
   }
 `;
 
-export const ButtonSpinner = styled(Wrapper)`
+export const ButtonSpinner = styled(Container)`
   width: 30px;
   height: 30px;
 `;

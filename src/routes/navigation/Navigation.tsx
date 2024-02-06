@@ -3,13 +3,18 @@ import styled from "styled-components";
 import { FC, useContext } from "react";
 import { UserContext } from "../../contexts/user.tsx";
 import { signOutUser } from "../../utils/firebase/utils.ts";
+import CartIcon from "../../components/cart-icon/CartIcon.tsx";
+import CartDropdown from "../../components/cart-dropdown/CartDropdown.tsx";
+import { CartContext } from "../../contexts/cart.tsx";
 
 const Navigation: FC = () => {
   const { currentUser } = useContext(UserContext);
 
+  const { isCartOpen } = useContext(CartContext);
+
   return (
     <>
-      <NavWrapper>
+      <NavContainer>
         <LogoContainer to="/">
           <img src={"/crown.svg"} alt={"CRWN Clothing"} />
         </LogoContainer>
@@ -22,14 +27,16 @@ const Navigation: FC = () => {
           ) : (
             <NavLink to="/auth">SIGN IN</NavLink>
           )}
+          <CartIcon />
         </NavLinks>
-      </NavWrapper>
+        {isCartOpen ? <CartDropdown /> : null}
+      </NavContainer>
       <Outlet />
     </>
   );
 };
 
-const NavWrapper = styled.nav`
+const NavContainer = styled.nav`
   height: 70px;
   width: 100%;
   display: flex;

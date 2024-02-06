@@ -6,12 +6,12 @@ const FormInput: FC<{ label: string; [x: string]: string }> = ({
   ...otherProps
 }) => {
   return (
-    <Wrapper>
+    <Container>
       <Input {...otherProps} />
       {label ? (
         <Label $shrink={otherProps.value.length > 0}>{label}</Label>
       ) : null}
-    </Wrapper>
+    </Container>
   );
 };
 
@@ -24,7 +24,7 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   position: relative;
   margin: 45px 0;
 

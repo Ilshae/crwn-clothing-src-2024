@@ -1,10 +1,10 @@
 import { FC, Suspense } from "react";
-import Loading from "./common/loading/Loading.tsx";
+import Loading from "./components/loading/Loading.tsx";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme.ts";
 import Main from "./routes/main/Main.tsx";
 import { Route, Routes } from "react-router-dom";
-import ErrorBoundary from "./common/error-boundary/ErrorBoundary.tsx";
+import ErrorBoundary from "./components/error-boundary/ErrorBoundary.tsx";
 import Shop from "./routes/shop/Shop.tsx";
 import Navigation from "./routes/navigation/Navigation.tsx";
 import Auth from "./routes/authentication/Auth.tsx";
@@ -14,7 +14,7 @@ const App: FC = () => {
     <Suspense fallback={<Loading />}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Wrapper>
+        <Container>
           <Routes>
             <Route
               path={"/"}
@@ -38,7 +38,7 @@ const App: FC = () => {
               />
             </Route>
           </Routes>
-        </Wrapper>
+        </Container>
       </ThemeProvider>
     </Suspense>
   );
@@ -48,10 +48,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${({ theme }) => theme.fontFamily};
     box-sizing: border-box;
+    padding: 20px 40px;
   }
 `;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
