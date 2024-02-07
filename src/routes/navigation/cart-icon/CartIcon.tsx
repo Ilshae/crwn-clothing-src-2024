@@ -1,16 +1,16 @@
 import { FC, useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "../../contexts/cart.tsx";
+import { CartContext } from "../../../contexts/cart.tsx";
 
 const CartIcon: FC = () => {
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
   const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
 
   return (
     <Container onClick={toggleIsCartOpen}>
       <ShoppingIcon src={"/shopping-bag.svg"} alt={"cart"} />
-      <Count>0</Count>
+      <Count>{cartCount}</Count>
     </Container>
   );
 };

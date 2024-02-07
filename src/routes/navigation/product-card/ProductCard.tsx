@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
-import Button from "../button/Button.tsx";
+import Button from "../../../components/button/Button.tsx";
+import { CartContext } from "../../../contexts/cart.tsx";
 
 type Product = {
   id: number;
@@ -11,6 +12,9 @@ type Product = {
 
 const ProductCard: FC<{ product: Product }> = ({ product }) => {
   const { name, price, imageUrl } = product;
+  const { addItemToCart } = useContext(CartContext);
+
+  const addProductToCart = () => addItemToCart(product);
 
   return (
     <Container>
@@ -19,7 +23,9 @@ const ProductCard: FC<{ product: Product }> = ({ product }) => {
         <Name>{name}</Name>
         <Price>{price}</Price>
       </Footer>
-      <StyledButton buttonType={"inverted"}>Add to cart</StyledButton>
+      <StyledButton buttonType={"inverted"} onClick={addProductToCart}>
+        Add to cart
+      </StyledButton>
     </Container>
   );
 };
@@ -36,7 +42,6 @@ const StyledButton = styled(Button)`
   opacity: 0.7;
   position: absolute;
   top: 255px;
-  display: none;
 `;
 
 const Container = styled.div`

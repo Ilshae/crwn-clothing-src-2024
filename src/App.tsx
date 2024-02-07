@@ -8,6 +8,7 @@ import ErrorBoundary from "./components/error-boundary/ErrorBoundary.tsx";
 import Shop from "./routes/shop/Shop.tsx";
 import Navigation from "./routes/navigation/Navigation.tsx";
 import Auth from "./routes/authentication/Auth.tsx";
+import Checkout from "./routes/checkout/Checkout.tsx";
 
 const App: FC = () => {
   return (
@@ -34,6 +35,11 @@ const App: FC = () => {
               <Route
                 path={"auth"}
                 element={<Auth />}
+                errorElement={<ErrorBoundary />}
+              />
+              <Route
+                path={"checkout"}
+                element={<Checkout />}
                 errorElement={<ErrorBoundary />}
               />
             </Route>

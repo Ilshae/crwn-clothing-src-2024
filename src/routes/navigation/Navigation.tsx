@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { FC, useContext } from "react";
 import { UserContext } from "../../contexts/user.tsx";
 import { signOutUser } from "../../utils/firebase/utils.ts";
-import CartIcon from "../../components/cart-icon/CartIcon.tsx";
-import CartDropdown from "../../components/cart-dropdown/CartDropdown.tsx";
+import CartIcon from "./cart-icon/CartIcon.tsx";
+import CartDropdown from "./cart-dropdown/CartDropdown.tsx";
 import { CartContext } from "../../contexts/cart.tsx";
 
 const Navigation: FC = () => {

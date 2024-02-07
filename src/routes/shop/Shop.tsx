@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { ProductsContext } from "../../contexts/products.tsx";
-import ProductCard from "../../components/product-card/ProductCard.tsx";
+import ProductCard from "../navigation/product-card/ProductCard.tsx";
 import styled from "styled-components";
 
 const Shop: FC = () => {
