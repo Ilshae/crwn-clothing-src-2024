@@ -3,18 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.tsx";
-import { ProductsProvider } from "./contexts/products.tsx";
+import { CategoriesProvider } from "./contexts/categories.tsx";
 import { CartProvider } from "./contexts/cart.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductsProvider>
+        <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
-        </ProductsProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

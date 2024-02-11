@@ -28,7 +28,7 @@ const App: FC = () => {
                 errorElement={<ErrorBoundary />}
               />
               <Route
-                path={"shop"}
+                path={"shop/*"}
                 element={<Shop />}
                 errorElement={<ErrorBoundary />}
               />

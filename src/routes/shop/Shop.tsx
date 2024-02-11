@@ -1,25 +1,33 @@
 import { FC, useContext } from "react";
-import { ProductsContext } from "../../contexts/products.tsx";
-import ProductCard from "../navigation/product-card/ProductCard.tsx";
+import { CategoriesContext } from "../../contexts/categories.tsx";
 import styled from "styled-components";
+import { Route, Routes } from "react-router-dom";
+import CategoriesPreview from "../categories-preview/CategoriesPreview.tsx";
+import Category from "../category/Category.tsx";
 
 const Shop: FC = () => {
-  const { products } = useContext(ProductsContext);
+  const { categoriesMap } = useContext(CategoriesContext);
 
   return (
-    <Container>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </Container>
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      <Route path={":category"} element={<Category />} />
+    </Routes>
   );
+
+  // return (
+  //   <Container>
+  //     {Object.keys(categoriesMap).map((key) => {
+  //       const products = categoriesMap[key];
+  //       return <CategoryPreview key={key} title={key} products={products} />;
+  //     })}
+  //   </Container>
+  // );
 };
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 10px;
-  row-gap: 50px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Shop;
