@@ -1,6 +1,8 @@
 import { FC, useContext } from "react";
 import styled from "styled-components";
-import Button from "../../../components/button/Button.tsx";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../../components/button/Button.tsx";
 import { CartContext } from "../../../contexts/cart.tsx";
 
 type Product = {
@@ -23,7 +25,10 @@ const ProductCard: FC<{ product: Product }> = ({ product }) => {
         <Name>{name}</Name>
         <Price>{price}</Price>
       </Footer>
-      <StyledButton buttonType={"inverted"} onClick={addProductToCart}>
+      <StyledButton
+        buttonType={BUTTON_TYPE_CLASSES.inverted}
+        onClick={addProductToCart}
+      >
         Add to cart
       </StyledButton>
     </Container>

@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import { CategoriesContext } from "../../contexts/categories.tsx";
+import { CategoriesContext } from "../../../contexts/categories.tsx";
 import CategoryPreview from "./category-preview/CategoryPreview.tsx";
 
 const CategoriesPreview: FC = () => {

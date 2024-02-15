@@ -2,7 +2,7 @@ import { FC, Suspense } from "react";
 import Loading from "./components/loading/Loading.tsx";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme.ts";
-import Main from "./routes/main/Main.tsx";
+import Directory from "./routes/main/Directory.tsx";
 import { Route, Routes } from "react-router-dom";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary.tsx";
 import Shop from "./routes/shop/Shop.tsx";
@@ -24,7 +24,7 @@ const App: FC = () => {
             >
               <Route
                 index
-                element={<Main />}
+                element={<Directory />}
                 errorElement={<ErrorBoundary />}
               />
               <Route

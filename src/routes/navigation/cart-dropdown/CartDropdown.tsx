@@ -16,9 +16,11 @@ const CartDropdown: FC = () => {
   return (
     <Container>
       <CartItems>
-        {cartItems.map((item) => (
-          <CartItem key={item.id} cartItem={item} />
-        ))}
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
+        ) : (
+          <EmptyMessage>Your cart is empty</EmptyMessage>
+        )}
       </CartItems>
       <StyledButton onClick={goToCheckoutHandler}>Go to checkout</StyledButton>
     </Container>
@@ -48,6 +50,11 @@ const CartItems = styled.div`
 
 const StyledButton = styled(Button)`
   margin-top: auto;
+`;
+
+const EmptyMessage = styled.span`
+  font-size: 18px;
+  margin: 50px auto;
 `;
 
 export default CartDropdown;

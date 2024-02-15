@@ -4,7 +4,9 @@ import {
 } from "../../utils/firebase/utils.ts";
 import { ChangeEvent, FormEvent, useState } from "react";
 import FormInput from "../../components/form-input/FormInput.tsx";
-import Button from "../../components/button/Button.tsx";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../components/button/Button.tsx";
 import styled from "styled-components";
 
 const defForm = {
@@ -28,12 +30,9 @@ const SignIn = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
 
+    try {
+      await signInAuthUserWithEmailAndPassword(email, password);
       await resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -82,7 +81,7 @@ const SignIn = () => {
         <Button type={"submit"}>Sign In</Button>
         <Button
           type={"button"}
-          buttonType={"google-sign-in"}
+          buttonType={BUTTON_TYPE_CLASSES.google}
           onClick={signInWithGoogle}
         >
           Google sign in

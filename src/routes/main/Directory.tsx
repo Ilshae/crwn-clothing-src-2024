@@ -1,13 +1,13 @@
 import { FC } from "react";
-import Category from "./Category.tsx";
+import DirectoryItem from "./DirectoryItem.tsx";
 import categories from "../../data/categories.json";
 import styled from "styled-components";
 
-const Main: FC = () => {
+const Directory: FC = () => {
   return (
     <Container>
-      {categories.map(({ id, title, imageUrl }) => (
-        <Category key={id} title={title} imageUrl={imageUrl} />
+      {categories.map((category) => (
+        <DirectoryItem key={category.id} {...category} />
       ))}
     </Container>
   );
@@ -20,4 +20,4 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-export default Main;
+export default Directory;

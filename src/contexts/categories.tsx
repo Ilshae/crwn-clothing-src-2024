@@ -12,9 +12,7 @@ export const CategoriesProvider: FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const getCategoriesMap = async () => {
-      9;
       const categoryMap = await getCategoriesAndDocuments();
-      console.log(categoryMap);
       setCategoriesMap(categoryMap);
     };
     getCategoriesMap();

@@ -1,12 +1,18 @@
 import { FC } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-const Category: FC<{ title: string; imageUrl: string }> = ({
+const DirectoryItem: FC<{ title: string; imageUrl: string; route: string }> = ({
   title,
   imageUrl,
+  route,
 }) => {
+  const navigate = useNavigate();
+
+  const onNavigateHandler = () => navigate(route);
+
   return (
-    <Container>
+    <Container onClick={onNavigateHandler}>
       <BackgroundImage $imageUrl={imageUrl} />
       <Card>
         <h2>{title}</h2>
@@ -85,4 +91,4 @@ export const Container = styled.div`
   }
 `;
 
-export default Category;
+export default DirectoryItem;
