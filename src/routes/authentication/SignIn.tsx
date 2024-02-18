@@ -55,11 +55,7 @@ const SignIn = () => {
     <Container>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
-      <form
-        onSubmit={async (event) => {
-          await handleSubmit(event);
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <FormInput
           label={"Email"}
           required
@@ -76,17 +72,17 @@ const SignIn = () => {
           value={password}
           onChange={(event) => handleChange(event)}
         />
+        <ButtonContainer>
+          <Button type={"submit"}>Sign In</Button>
+          <Button
+            type={"button"}
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={signInWithGoogle}
+          >
+            Google sign in
+          </Button>
+        </ButtonContainer>
       </form>
-      <ButtonContainer>
-        <Button type={"submit"}>Sign In</Button>
-        <Button
-          type={"button"}
-          buttonType={BUTTON_TYPE_CLASSES.google}
-          onClick={signInWithGoogle}
-        >
-          Google sign in
-        </Button>
-      </ButtonContainer>
     </Container>
   );
 };

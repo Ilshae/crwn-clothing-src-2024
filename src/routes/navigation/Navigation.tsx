@@ -1,16 +1,16 @@
 import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { FC, useContext } from "react";
-import { UserContext } from "../../contexts/user.tsx";
+import { FC } from "react";
 import { signOutUser } from "../../utils/firebase/utils.ts";
 import CartIcon from "./cart-icon/CartIcon.tsx";
 import CartDropdown from "./cart-dropdown/CartDropdown.tsx";
-import { CartContext } from "../../contexts/cart.tsx";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/selectors.ts";
+import { selectIsCartOpen } from "../../store/cart/selectors.ts";
 
 const Navigation: FC = () => {
-  const { currentUser } = useContext(UserContext);
-
-  const { isCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <>

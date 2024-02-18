@@ -1,9 +1,11 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../../components/button/Button.tsx";
-import { CartContext } from "../../../contexts/cart.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "../../../store/cart/actions.ts";
+import { selectCartItems } from "../../../store/cart/selectors.ts";
 
 type Product = {
   id: number;
@@ -13,10 +15,11 @@ type Product = {
 };
 
 const ProductCard: FC<{ product: Product }> = ({ product }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const { name, price, imageUrl } = product;
-  const { addItemToCart } = useContext(CartContext);
 
-  const addProductToCart = () => addItemToCart(product);
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
 
   return (
     <Container>

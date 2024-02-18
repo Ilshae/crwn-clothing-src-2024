@@ -1,4 +1,4 @@
-import { FC, Suspense } from "react";
+import { FC, Suspense, useEffect } from "react";
 import Loading from "./components/loading/Loading.tsx";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme.ts";
@@ -9,8 +9,25 @@ import Shop from "./routes/shop/Shop.tsx";
 import Navigation from "./routes/navigation/Navigation.tsx";
 import Auth from "./routes/authentication/Auth.tsx";
 import Checkout from "./routes/checkout/Checkout.tsx";
+import {
+  createUserDocumentFromAuth,
+  onAuthStateChangedListener,
+} from "./utils/firebase/utils.ts";
+import { setCurrentUser } from "./store/user/actions.ts";
+import { useDispatch } from "react-redux";
 
 const App: FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) createUserDocumentFromAuth(user);
+      dispatch(setCurrentUser(user));
+    });
+
+    return unsubscribe;
+  });
+
   return (
     <Suspense fallback={<Loading />}>
       <ThemeProvider theme={theme}>
