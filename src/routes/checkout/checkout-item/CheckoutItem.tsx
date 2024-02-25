@@ -1,20 +1,33 @@
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../../store/cart/selectors.ts";
+import { selectCartItems } from "../../../store/cart/cartSelectors.ts";
 import {
   addItemToCart,
   clearItemFromCart,
   removeItemFromCart,
 } from "../../../store/cart/actions.ts";
+import {
+  Arrow,
+  BaseSpan,
+  Container,
+  ImageContainer,
+  Quantity,
+  RemoveButton,
+  Value,
+} from "./CheckoutItemStyles.ts";
+import { FC } from "react";
 
-const CheckoutItem = ({ cartItem }) => {
-  const dispatch = useDispatch();
+import { CartItemType } from "../../../types.ts";
+
+const CheckoutItem: FC<CartItemType> = (cartItem) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
 
   const removeItemHandler = () =>
     dispatch(removeItemFromCart(cartItems, cartItem));
+
   const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
+
   const clearItemHandler = () =>
     dispatch(clearItemFromCart(cartItems, cartItem));
 
@@ -34,46 +47,5 @@ const CheckoutItem = ({ cartItem }) => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  min-height: 100px;
-  border-bottom: 1px solid darkgrey;
-  padding: 15px 0;
-  font-size: 20px;
-  align-items: center;
-`;
-
-const ImageContainer = styled.div`
-  width: 23%;
-  padding-right: 15px;
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-export const BaseSpan = styled.span`
-  width: 23%;
-`;
-
-export const Quantity = styled(BaseSpan)`
-  display: flex;
-`;
-
-export const Arrow = styled.div`
-  cursor: pointer;
-`;
-
-export const Value = styled.span`
-  margin: 0 10px;
-`;
-
-export const RemoveButton = styled.div`
-  padding-left: 12px;
-  cursor: pointer;
-`;
 
 export default CheckoutItem;

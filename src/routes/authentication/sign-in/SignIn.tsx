@@ -1,31 +1,35 @@
+import { ChangeEvent, FormEvent, useState } from "react";
+import FormInput from "../../../components/form-input/FormInput.tsx";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../../components/button/Button.tsx";
+import { ButtonContainer, Container } from "./SignInStyles.ts";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
-} from "../../utils/firebase/utils.ts";
-import { ChangeEvent, FormEvent, useState } from "react";
-import FormInput from "../../components/form-input/FormInput.tsx";
-import Button, {
-  BUTTON_TYPE_CLASSES,
-} from "../../components/button/Button.tsx";
-import styled from "styled-components";
+} from "../../../utils.ts";
 
-const defForm = {
+const defaultFormFields = {
   email: "",
   password: "",
 };
 
 const SignIn = () => {
-  const [form, setForm] = useState(defForm);
-  const { email, password } = form;
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { email, password } = formFields;
 
   const resetFormFields = () => {
-    setForm(defForm);
+    setFormFields(defaultFormFields);
+  };
+
+  const signInWithGoogle = async () => {
+    await signInWithGooglePopup();
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { name, value } = target;
-    setForm({ ...form, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -33,22 +37,10 @@ const SignIn = () => {
 
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
-      await resetFormFields();
+      resetFormFields();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("Incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("No user associated with this email");
-          break;
-        default:
-          console.log(error);
-      }
+      console.log("user sign in failed", error);
     }
-  };
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
   };
 
   return (
@@ -86,20 +78,5 @@ const SignIn = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 380px;
-
-  h2 {
-    margin: 10px 0;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export default SignIn;

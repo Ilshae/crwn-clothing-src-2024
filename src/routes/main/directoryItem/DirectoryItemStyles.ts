@@ -1,26 +1,4 @@
-import { FC } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-
-const DirectoryItem: FC<{ title: string; imageUrl: string; route: string }> = ({
-  title,
-  imageUrl,
-  route,
-}) => {
-  const navigate = useNavigate();
-
-  const onNavigateHandler = () => navigate(route);
-
-  return (
-    <Container onClick={onNavigateHandler}>
-      <BackgroundImage $imageUrl={imageUrl} />
-      <Card>
-        <h2>{title}</h2>
-        <p>Shop Now</p>
-      </Card>
-    </Container>
-  );
-};
 
 export const BackgroundImage = styled.div<{
   $imageUrl: string;
@@ -90,5 +68,3 @@ export const Container = styled.div`
     }
   }
 `;
-
-export default DirectoryItem;

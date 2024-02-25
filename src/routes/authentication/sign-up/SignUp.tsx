@@ -2,12 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "../../utils/firebase/utils.ts";
-import FormInput from "../../components/form-input/FormInput.tsx";
-import styled from "styled-components";
-import Button from "../../components/button/Button.tsx";
+} from "../../../utils.ts";
+import FormInput from "../../../components/form-input/FormInput.tsx";
+import Button from "../../../components/button/Button.tsx";
+import { Container } from "./SignUpStyles.ts";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 
-const defForm = {
+const defaultFormFields = {
   displayName: "",
   email: "",
   password: "",
@@ -15,17 +16,17 @@ const defForm = {
 };
 
 const SignUp = () => {
-  const [form, setForm] = useState(defForm);
-  const { displayName, email, password, confirmPassword } = form;
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { displayName, email, password, confirmPassword } = formFields;
 
   const resetFormFields = () => {
-    setForm(defForm);
+    setFormFields(defaultFormFields);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { name, value } = target;
-    setForm({ ...form, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -43,12 +44,13 @@ const SignUp = () => {
       );
 
       await createUserDocumentFromAuth(user, { displayName });
-      await resetFormFields();
+      resetFormFields();
     } catch (error) {
-      if (error.code === "auth/email-already-in-use")
+      if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert("Cannot create user, email already in use");
-
-      console.log("error creating the user", error);
+      } else {
+        console.log("user creation encountered an error", error);
+      }
     }
   };
 
@@ -99,15 +101,5 @@ const SignUp = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 380px;
-
-  h2 {
-    margin: 10px 0;
-  }
-`;
 
 export default SignUp;

@@ -1,14 +1,25 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../../navigation/product-card/ProductCard.tsx";
-import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { selectCaterogiesMap } from "../../../store/categories/selectors.ts";
+import {
+  selectCategoriesIsLoading,
+  selectCategoriesMap,
+} from "../../../store/categories/categoriesSelectors.ts";
+import Spinner from "../../../components/spinner/Spinner.tsx";
+import { Container, Title } from "./CategoryStyles.ts";
+import { CategoryItem } from "../../../types.ts";
 
-const Category: FC = () => {
-  const { category } = useParams();
-  const categoriesMap = useSelector(selectCaterogiesMap);
+type CategoryRouteParams = {
+  category: string;
+};
 
+const Category = () => {
+  const { category } = useParams<
+    keyof CategoryRouteParams
+  >() as CategoryRouteParams;
+  const categoriesMap = useSelector(selectCategoriesMap);
+  const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
@@ -17,27 +28,19 @@ const Category: FC = () => {
 
   return (
     <>
-      <Title>{category?.toUpperCase()}</Title>
-      <Container>
-        {products &&
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-      </Container>
+      <Title>{category.toUpperCase()}</Title>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Container>
+          {products &&
+            products.map((product: CategoryItem) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+        </Container>
+      )}
     </>
   );
 };
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 20px;
-  row-gap: 50px;
-`;
-
-const Title = styled.h2`
-  font-size: 38px;
-  margin-bottom: 25px;
-`;
 
 export default Category;
