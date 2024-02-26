@@ -1,11 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../../store/cart/cartSelectors.ts";
 import {
-  addItemToCart,
-  clearItemFromCart,
-  removeItemFromCart,
-} from "../../../store/cart/actions.ts";
-import {
   Arrow,
   BaseSpan,
   Container,
@@ -17,19 +12,22 @@ import {
 import { FC } from "react";
 
 import { CartItemType } from "../../../types.ts";
+import {
+  addItemToCart,
+  clearItemFromCart,
+  removeItemFromCart,
+} from "../../../store/cart/cartSlice.ts";
 
 const CheckoutItem: FC<CartItemType> = (cartItem) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
 
-  const removeItemHandler = () =>
-    dispatch(removeItemFromCart(cartItems, cartItem));
+  const removeItemHandler = () => dispatch(removeItemFromCart(cartItem));
 
-  const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
+  const addItemHandler = () => dispatch(addItemToCart(cartItem));
 
-  const clearItemHandler = () =>
-    dispatch(clearItemFromCart(cartItems, cartItem));
+  const clearItemHandler = () => dispatch(clearItemFromCart(cartItem));
 
   return (
     <Container>

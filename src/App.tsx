@@ -14,7 +14,7 @@ import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
 } from "./utils.ts";
-import { setCurrentUser } from "./store/user/userReducer.ts";
+import { setCurrentUser } from "./store/user/userSlice.ts";
 import { Container, GlobalStyle } from "./AppStyles.ts";
 
 const App: FC = () => {
@@ -28,7 +28,6 @@ const App: FC = () => {
       const pickedUser =
         user && (({ accessToken, email }) => ({ accessToken, email }))(user);
 
-      console.log(setCurrentUser(pickedUser));
       dispatch(setCurrentUser(pickedUser));
     });
 

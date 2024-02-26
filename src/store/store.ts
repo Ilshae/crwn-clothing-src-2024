@@ -1,12 +1,13 @@
-import logger from "redux-logger";
-import { rootReducer } from "./rootReducer.ts";
-
-const middleWares = [process.env.NODE_ENV === "development" && logger].filter(
-  Boolean,
-);
+import { configureStore } from "@reduxjs/toolkit";
+import { userReducer } from "./user/userSlice.ts";
+import { categoriesReducer } from "./categories/categoriesSlice.ts";
+import { cartReducer } from "./cart/cartSlice.ts";
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleWares),
+  reducer: {
+    user: userReducer,
+    categories: categoriesReducer,
+    cart: cartReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

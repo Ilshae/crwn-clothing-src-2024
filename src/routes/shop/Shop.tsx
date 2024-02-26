@@ -4,6 +4,7 @@ import CategoriesPreview from "./categories-preview/CategoriesPreview.tsx";
 import Category from "./category/Category.tsx";
 import { useDispatch } from "react-redux";
 import { getCategoriesAndDocuments } from "../../utils.ts";
+import { setCategories } from "../../store/categories/categoriesSlice.ts";
 
 const Shop = () => {
   const dispatch = useDispatch();

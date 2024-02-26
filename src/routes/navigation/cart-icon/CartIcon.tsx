@@ -4,8 +4,8 @@ import {
   selectCartCount,
   selectIsCartOpen,
 } from "../../../store/cart/cartSelectors.ts";
-import { setIsCartOpen } from "../../../store/cart/actions.ts";
 import { Container, Count, ShoppingIcon } from "./CartIconStyles.ts";
+import { setIsCartOpen } from "../../../store/cart/cartSlice.ts";
 
 const CartIcon: FC = () => {
   const dispatch = useDispatch();
