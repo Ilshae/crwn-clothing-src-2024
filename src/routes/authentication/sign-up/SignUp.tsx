@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from "../../../utils.ts";
+} from "../../../utils/firebase.ts";
 import FormInput from "../../../components/form-input/FormInput.tsx";
 import Button from "../../../components/button/Button.tsx";
 import { Container } from "./SignUpStyles.ts";

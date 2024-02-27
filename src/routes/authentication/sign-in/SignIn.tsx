@@ -7,7 +7,7 @@ import { ButtonContainer, Container } from "./SignInStyles.ts";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
-} from "../../../utils.ts";
+} from "../../../utils/firebase.ts";
 
 const defaultFormFields = {
   email: "",

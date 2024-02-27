@@ -22,7 +22,7 @@ import {
   setDoc,
   writeBatch,
 } from "firebase/firestore";
-import { Category } from "./types.ts";
+import { Category } from "../types.ts";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk",

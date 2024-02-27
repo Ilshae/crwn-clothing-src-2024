@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { FC } from "react";
-import { signOutUser } from "../../utils.ts";
+import { signOutUser } from "../../utils/firebase.ts";
 import CartIcon from "./cart-icon/CartIcon.tsx";
 import CartDropdown from "./cart-dropdown/CartDropdown.tsx";
 import { useSelector } from "react-redux";

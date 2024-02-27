@@ -6,6 +6,7 @@ import {
 } from "../../store/cart/cartSelectors.ts";
 import { Container, Header, HeaderCell, Total } from "./CheckoutStyles.ts";
 import { CartItemType } from "../../types.ts";
+import PaymentForm from "./payment-form/PaymentForm.tsx";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -24,6 +25,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.name} {...cartItem} />
       ))}
       <Total>Total: ${cartTotal}</Total>
+      <PaymentForm />
     </Container>
   );
 };

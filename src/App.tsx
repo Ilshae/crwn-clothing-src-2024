@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
-} from "./utils.ts";
+} from "./utils/firebase.ts";
 import { setCurrentUser } from "./store/user/userSlice.ts";
 import { Container, GlobalStyle } from "./AppStyles.ts";
 

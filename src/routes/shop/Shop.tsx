@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import CategoriesPreview from "./categories-preview/CategoriesPreview.tsx";
 import Category from "./category/Category.tsx";
 import { useDispatch } from "react-redux";
-import { getCategoriesAndDocuments } from "../../utils.ts";
+import { getCategoriesAndDocuments } from "../../utils/firebase.ts";
 import { setCategories } from "../../store/categories/categoriesSlice.ts";
 
 const Shop = () => {
