@@ -4,7 +4,7 @@ import ProductCard from "../../navigation/product-card/ProductCard.tsx";
 import { useSelector } from "react-redux";
 import { selectCategoriesMap } from "../../../store/categories/categoriesSelectors.ts";
 import { Container, Title } from "./CategoryStyles.ts";
-import { CategoryItem } from "../../../types.ts";
+import { CategoryItem, CategoryMap } from "../../../types.ts";
 
 type CategoryRouteParams = {
   category: string;
@@ -14,7 +14,7 @@ const Category = () => {
   const { category } = useParams<
     keyof CategoryRouteParams
   >() as CategoryRouteParams;
-  const categoriesMap = useSelector(selectCategoriesMap);
+  const categoriesMap: CategoryMap = useSelector(selectCategoriesMap);
   const [products, setProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {

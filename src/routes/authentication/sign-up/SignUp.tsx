@@ -38,12 +38,10 @@ const SignUp = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
+      const res = await createAuthUserWithEmailAndPassword(email, password);
+      if (!res) throw Error();
 
-      await createUserDocumentFromAuth(user, { displayName });
+      await createUserDocumentFromAuth(res?.user, { displayName });
       resetFormFields();
     } catch (error) {
       if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {

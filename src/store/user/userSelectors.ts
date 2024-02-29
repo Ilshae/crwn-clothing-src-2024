@@ -1,1 +1,3 @@
-export const selectCurrentUser = (state) => state.user.currentUser;
+import { StateType } from "../../types.ts";
+
+export const selectCurrentUser = (state: StateType) => state.user.currentUser;

@@ -17,6 +17,8 @@ import {
 import { setCurrentUser } from "./store/user/userSlice.ts";
 import { Container, GlobalStyle } from "./AppStyles.ts";
 
+type TokenAndEmail = { accessToken: string; email: string };
+
 const App: FC = () => {
   const dispatch = useDispatch();
 
@@ -26,7 +28,11 @@ const App: FC = () => {
         createUserDocumentFromAuth(user);
       }
       const pickedUser =
-        user && (({ accessToken, email }) => ({ accessToken, email }))(user);
+        user &&
+        (({ accessToken, email }: TokenAndEmail) => ({
+          accessToken,
+          email,
+        }));
 
       dispatch(setCurrentUser(pickedUser));
     });

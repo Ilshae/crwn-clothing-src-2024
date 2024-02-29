@@ -1,20 +1,20 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { CardElement } from "@stripe/react-stripe-js";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../../components/button/Button.tsx";
 import { FormContainer, PaymentFormContainer } from "./PaymentFormStyles.ts";
 
 const PaymentForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const paymentHandler = async (e) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-  };
+  // const stripe = useStripe();
+  // const elements = useElements();
+  //
+  // const paymentHandler = async (e) => {
+  //   e.preventDefault();
+  //
+  //   if (!stripe || !elements) {
+  //     return;
+  //   }
+  // };
 
   return (
     <PaymentFormContainer>

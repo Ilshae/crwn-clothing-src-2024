@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CartItemType } from "../../types.ts";
 
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems: CartItemType[], productToAdd: CartItemType) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id,
   );
@@ -16,14 +17,17 @@ const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
-const removeCartItem = (cartItems, cartItemToRemove) => {
+const removeCartItem = (
+  cartItems: CartItemType[],
+  cartItemToRemove: CartItemType,
+) => {
   // find the cart item to remove
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemToRemove.id,
   );
 
   // check if quantity is equal to 1, if it is remove that item from the cart
-  if (existingCartItem.quantity === 1) {
+  if (existingCartItem?.quantity === 1) {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
   }
 
@@ -35,10 +39,12 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
-const clearCartItem = (cartItems, cartItemToClear) =>
-  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+const clearCartItem = (
+  cartItems: CartItemType[],
+  cartItemToClear: CartItemType,
+) => cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 
-const CART_INITIAL_STATE = {
+const CART_INITIAL_STATE: { isCartOpen: boolean; cartItems: CartItemType[] } = {
   isCartOpen: false,
   cartItems: [],
 };

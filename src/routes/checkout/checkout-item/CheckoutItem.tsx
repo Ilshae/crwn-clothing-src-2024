@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../../store/cart/cartSelectors.ts";
+import { useDispatch } from "react-redux";
 import {
   Arrow,
   BaseSpan,
@@ -20,7 +19,6 @@ import {
 
 const CheckoutItem: FC<CartItemType> = (cartItem) => {
   const { name, imageUrl, price, quantity } = cartItem;
-  const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
 
   const removeItemHandler = () => dispatch(removeItemFromCart(cartItem));

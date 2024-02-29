@@ -10,6 +10,7 @@ import {
   signInWithRedirect,
   signOut,
   User,
+  UserCredential,
 } from "firebase/auth";
 import {
   collection,
@@ -33,7 +34,12 @@ const firebaseConfig = {
   appId: "1:626766232035:web:506621582dab103a4d08d6",
 };
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
 const firebaseApp = initializeApp(firebaseConfig);
+/* eslint-enable @typescript-eslint/ban-ts-comment */
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -121,7 +127,7 @@ export const createUserDocumentFromAuth = async (
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string,
-) => {
+): Promise<UserCredential | undefined> => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
