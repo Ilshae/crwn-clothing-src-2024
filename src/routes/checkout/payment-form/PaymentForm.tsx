@@ -3,11 +3,17 @@ import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../../components/button/Button.tsx";
 import { FormContainer, PaymentFormContainer } from "./PaymentFormStyles.ts";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCartTotal } from "../../../store/cart/cartSelectors.ts";
+import { selectCurrentUser } from "../../../store/user/userSelectors.ts";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const amount = useSelector(selectCartTotal);
+  const currentUser = useSelector(selectCurrentUser);
+  const [isProcessingPayment, setProcessingPayment] = useState(false);
 
   const paymentHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,12 +22,14 @@ const PaymentForm = () => {
       return;
     }
 
+    setProcessingPayment(true);
+
     const response = await fetch("/.netlify/functions/create-payment-intent", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: 10000 }),
+      body: JSON.stringify({ amount: amount * 100 }),
     }).then((res) => res.json());
 
     const {
@@ -34,10 +42,11 @@ const PaymentForm = () => {
       payment_method: {
         card: cardDetails!,
         billing_details: {
-          name: "User name",
+          name: currentUser ?? "Guest",
         },
       },
     });
+    setProcessingPayment(false);
 
     if (paymentResult.error) {
       alert(paymentResult.error);
@@ -53,7 +62,12 @@ const PaymentForm = () => {
       <FormContainer onSubmit={(e) => paymentHandler(e)}>
         <h2>Credit Card Payment:</h2>
         <CardElement />
-        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>Pay now</Button>
+        <Button
+          disabled={isProcessingPayment}
+          buttonType={BUTTON_TYPE_CLASSES.inverted}
+        >
+          Pay now
+        </Button>
       </FormContainer>
     </PaymentFormContainer>
   );
