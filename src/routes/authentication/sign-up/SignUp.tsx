@@ -7,6 +7,7 @@ import FormInput from "../../../components/form-input/FormInput.tsx";
 import Button from "../../../components/button/Button.tsx";
 import { Container } from "./SignUpStyles.ts";
 import { AuthError, AuthErrorCodes } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   displayName: "",
@@ -18,10 +19,11 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const navigate = useNavigate();
 
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
-  };
+  // const resetFormFields = () => {
+  //   setFormFields(defaultFormFields);
+  // };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -42,7 +44,7 @@ const SignUp = () => {
       if (!res) throw Error();
 
       await createUserDocumentFromAuth(res?.user, { displayName });
-      resetFormFields();
+      navigate("/");
     } catch (error) {
       if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert("Cannot create user, email already in use");
