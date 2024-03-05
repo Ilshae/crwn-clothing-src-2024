@@ -19,7 +19,8 @@ export const CartItems = styled.div`
   height: 240px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const Button = styled(CustomButton)`
