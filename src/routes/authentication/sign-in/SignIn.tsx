@@ -1,13 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import FormInput from "../../../components/form-input/FormInput.tsx";
-import Button, {
-  BUTTON_TYPE_CLASSES,
-} from "../../../components/button/Button.tsx";
+import Button from "../../../components/button/Button.tsx";
 import { ButtonContainer, Container } from "./SignInStyles.ts";
-import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-} from "../../../utils/firebase.ts";
+import { signInAuthUserWithEmailAndPassword } from "../../../utils/firebase.ts";
 import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
@@ -19,14 +14,6 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
   const navigate = useNavigate();
-
-  // const resetFormFields = () => {
-  //   setFormFields(defaultFormFields);
-  // };
-
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
-  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -68,13 +55,6 @@ const SignIn = () => {
         />
         <ButtonContainer>
           <Button type={"submit"}>Sign In</Button>
-          <Button
-            type={"button"}
-            buttonType={BUTTON_TYPE_CLASSES.google}
-            onClick={signInWithGoogle}
-          >
-            Google sign in
-          </Button>
         </ButtonContainer>
       </form>
     </Container>

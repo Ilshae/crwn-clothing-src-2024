@@ -2,12 +2,9 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
   NextOrObserver,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup,
-  signInWithRedirect,
   signOut,
   User,
   UserCredential,
@@ -21,7 +18,6 @@ import {
   query,
   QueryDocumentSnapshot,
   setDoc,
-  writeBatch,
 } from "firebase/firestore";
 import { Category } from "../types.ts";
 
@@ -41,39 +37,9 @@ const firebaseApp = initializeApp(firebaseConfig);
 /* eslint-enable @typescript-eslint/ban-ts-comment */
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const googleProvider = new GoogleAuthProvider();
-
-googleProvider.setCustomParameters({
-  prompt: "select_account",
-});
-
 export const auth = getAuth();
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () =>
-  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
-
-export type ObjectToAdd = {
-  title: string;
-};
-
-export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
-  collectionKey: string,
-  objectsToAdd: T[],
-): Promise<void> => {
-  const collectionRef = collection(db, collectionKey);
-  const batch = writeBatch(db);
-
-  objectsToAdd.forEach((object) => {
-    const docRef = doc(collectionRef, object.title.toLowerCase());
-    batch.set(docRef, object);
-  });
-
-  await batch.commit();
-  console.log("done");
-};
 
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, "categories");
@@ -146,16 +112,3 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
   onAuthStateChanged(auth, callback);
-
-export const getCurrentUser = (): Promise<User | null> => {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = onAuthStateChanged(
-      auth,
-      (userAuth) => {
-        unsubscribe();
-        resolve(userAuth);
-      },
-      reject,
-    );
-  });
-};
