@@ -1,9 +1,12 @@
 import { FC, InputHTMLAttributes } from "react";
-import { Container, Input, Label } from "./FormInputStyles.ts";
+import { Container, ErrorText, Input, Label } from "./FormInputStyles.ts";
 
-type FormInputProps = { label: string } & InputHTMLAttributes<HTMLInputElement>;
+type FormInputProps = {
+  label: string;
+  error: string;
+} & InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
+const FormInput: FC<FormInputProps> = ({ label, error, ...otherProps }) => {
   return (
     <Container>
       <Input {...otherProps} />
@@ -18,6 +21,7 @@ const FormInput: FC<FormInputProps> = ({ label, ...otherProps }) => {
           {label}
         </Label>
       ) : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
     </Container>
   );
 };

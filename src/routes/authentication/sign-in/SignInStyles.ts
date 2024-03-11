@@ -14,3 +14,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const SignInError = styled.div`
+  color: red;
+  font-size: 14px;
+  margin: 45px 0;
+`;

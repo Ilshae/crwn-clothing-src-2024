@@ -9,3 +9,9 @@ export const Container = styled.div`
     margin: 10px 0;
   }
 `;
+
+export const SignUpError = styled.div`
+  color: red;
+  font-size: 14px;
+  margin: 45px 0;
+`;

@@ -36,7 +36,6 @@ export const Input = styled.input`
   border: none;
   border-radius: 0;
   border-bottom: 1px solid ${subColor};
-  margin: 25px 0;
 
   &:focus {
     outline: none;
@@ -54,4 +53,9 @@ export const Container = styled.div`
   input[type="password"] {
     letter-spacing: 0.3em;
   }
+`;
+
+export const ErrorText = styled.span`
+  color: red;
+  font-size: 14px;
 `;

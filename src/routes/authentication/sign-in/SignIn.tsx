@@ -3,12 +3,14 @@ import FormInput from "../../../components/form-input/FormInput.tsx";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../../components/button/Button.tsx";
-import { ButtonContainer, Container } from "./SignInStyles.ts";
+import { ButtonContainer, Container, SignInError } from "./SignInStyles.ts";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../../utils/firebase.ts";
 import { useNavigate } from "react-router-dom";
+import { validateSignIn } from "../validation/validation.ts";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 
 const defaultFormFields = {
   email: "",
@@ -18,10 +20,13 @@ const defaultFormFields = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const [errors, setErrors] = useState(defaultFormFields);
+  const [signInError, setSignInError] = useState("");
   const navigate = useNavigate();
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
+    navigate("/");
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,14 +35,22 @@ const SignIn = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  const validate = () => {
+    const errors = validateSignIn(formFields);
+    setErrors({ ...errors });
+    return Object.values(errors).every((x) => x === "");
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      await signInAuthUserWithEmailAndPassword(email, password);
-      navigate("/");
-    } catch (error) {
-      console.log("user sign in failed", error);
+    if (validate()) {
+      try {
+        await signInAuthUserWithEmailAndPassword(email, password);
+        navigate("/");
+      } catch (error) {
+        setSignInError(describeError(error as AuthError));
+      }
     }
   };
 
@@ -53,6 +66,7 @@ const SignIn = () => {
           name={"email"}
           value={email}
           onChange={(event) => handleChange(event)}
+          error={errors.email}
         />
         <FormInput
           label={"Password"}
@@ -61,7 +75,9 @@ const SignIn = () => {
           name={"password"}
           value={password}
           onChange={(event) => handleChange(event)}
+          error={errors.password}
         />
+
         <ButtonContainer>
           <Button type={"submit"}>Sign In</Button>
           <Button
@@ -72,9 +88,16 @@ const SignIn = () => {
             Google sign in
           </Button>
         </ButtonContainer>
+        {signInError ? <SignInError>{signInError}</SignInError> : null}
       </form>
     </Container>
   );
+};
+
+const describeError = (error: AuthError) => {
+  if (error.code === AuthErrorCodes.INVALID_LOGIN_CREDENTIALS)
+    return "Invalid login or password";
+  return "Something went wrong. Try again or contact the administrator";
 };
 
 export default SignIn;
