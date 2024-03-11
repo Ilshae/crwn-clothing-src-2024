@@ -25,12 +25,12 @@ import {
 import { Category } from "../types.ts";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk",
-  authDomain: "unrivaled-hamster-685c15.netlify.app",
-  projectId: "crwn-clothing-db-98d4d",
-  storageBucket: "crwn-clothing-db-98d4d.appspot.com",
-  messagingSenderId: "626766232035",
-  appId: "1:626766232035:web:506621582dab103a4d08d6",
+  apiKey: "AIzaSyDl1SrEY04vczteFVxbIhIrvDx_1w42ISo",
+  authDomain: "crwn-db-2024-e6998.firebaseapp.com",
+  projectId: "crwn-db-2024-e6998",
+  storageBucket: "crwn-db-2024-e6998.appspot.com",
+  messagingSenderId: "61822219798",
+  appId: "1:61822219798:web:e001f8cfb3d30d39656737",
 };
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
