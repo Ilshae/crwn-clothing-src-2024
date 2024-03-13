@@ -1,5 +1,6 @@
 export const theme = {
   fontFamily: '"Open Sans", sans-serif',
+  maxWidth: "1900px",
   screenSize: {
     mobileS: "320px",
     mobileM: "375px",
@@ -9,6 +10,13 @@ export const theme = {
     laptopL: "1440px",
     desktop: "1980px",
     desktopL: "2560px",
+  },
+  margin: {
+    desktop: "0 100px",
+    laptopL: "0 80px",
+    laptop: "0 20px",
+    tablet: "0 20px",
+    mobileM: "0 20px",
   },
 };
 

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CustomButton from "../../../components/button/Button.tsx";
+import { device } from "../../../theme.ts";
 
 export const Container = styled.div`
   position: absolute;
@@ -13,6 +14,11 @@ export const Container = styled.div`
   top: 90px;
   right: 40px;
   z-index: 5;
+
+  @media ${device.mobileM} {
+    width: 200px;
+    height: 300px;
+  }
 `;
 
 export const CartItems = styled.div`
@@ -26,6 +32,11 @@ export const CartItems = styled.div`
 export const Button = styled(CustomButton)`
   margin-top: auto;
   text-transform: uppercase;
+
+  @media ${device.mobileM} {
+    font-size: 14px;
+    white-space: nowrap;
+  }
 `;
 
 export const EmptyMessage = styled.span`

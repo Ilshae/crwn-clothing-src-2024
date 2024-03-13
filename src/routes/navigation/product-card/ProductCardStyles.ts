@@ -22,6 +22,8 @@ export const Container = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
+  padding: 15px 0;
+  white-space: nowrap;
 
   &:hover {
     Image {

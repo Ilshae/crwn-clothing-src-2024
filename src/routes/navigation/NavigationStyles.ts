@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { device } from "../../theme.ts";
 
 export const NavContainer = styled.nav`
   height: 70px;
@@ -23,6 +24,10 @@ export const NavLinks = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export const NavLink = styled(Link)`

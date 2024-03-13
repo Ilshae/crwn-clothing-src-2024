@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../../theme.ts";
 
 export const BackgroundImage = styled.div<{
   $imageUrl: string;
@@ -28,11 +29,20 @@ export const Card = styled.div`
     font-size: 22px;
     color: #4a4a4a;
     text-transform: uppercase;
+
+    @media ${device.mobileL} {
+      font-size: 18px;
+      margin: 0;
+    }
   }
 
   p {
     font-weight: lighter;
     font-size: 16px;
+
+    @media ${device.mobileL} {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -66,5 +76,9 @@ export const Container = styled.div`
     ${Card} {
       opacity: 0.9;
     }
+  }
+
+  @media ${device.tablet} {
+    min-width: 100%;
   }
 `;
