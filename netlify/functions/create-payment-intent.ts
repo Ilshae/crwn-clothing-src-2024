@@ -1,10 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+import { Handler, HandlerEvent } from "@netlify/functions";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-exports.handler = async (event) => {
+const handler: Handler = async (event: HandlerEvent) => {
   console.log(event);
   try {
     const { amount } = JSON.parse(event.body);
@@ -22,11 +25,13 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    console.log({ error });
+    console.log("create-payment-intent", error);
 
     return {
-      status: 400,
+      statusCode: 400,
       body: JSON.stringify({ error }),
     };
   }
 };
+
+export { handler };
