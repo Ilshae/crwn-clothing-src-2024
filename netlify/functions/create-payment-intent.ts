@@ -8,7 +8,6 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const handler: Handler = async (event: HandlerEvent) => {
-  console.log("stripe", stripe);
   try {
     const { amount } = JSON.parse(event.body);
 
