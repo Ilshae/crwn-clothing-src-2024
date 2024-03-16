@@ -24,8 +24,6 @@ const handler: Handler = async (event: HandlerEvent) => {
       }),
     };
   } catch (error) {
-    console.log("create-payment-intent", error);
-
     return {
       statusCode: 400,
       body: JSON.stringify({ error }),

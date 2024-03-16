@@ -2,7 +2,11 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../../components/button/Button.tsx";
-import { FormContainer, PaymentFormContainer } from "./PaymentFormStyles.ts";
+import {
+  FormContainer,
+  PaymentFormContainer,
+  Text,
+} from "./PaymentFormStyles.ts";
 import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../../store/cart/cartSelectors.ts";
@@ -31,8 +35,6 @@ const PaymentForm = () => {
       },
       body: JSON.stringify({ amount: amount * 100 }),
     }).then((res) => res.json());
-
-    console.log(response);
 
     const {
       paymentIntent: { client_secret },
@@ -64,6 +66,10 @@ const PaymentForm = () => {
       <FormContainer onSubmit={(e) => paymentHandler(e)}>
         <h2>Credit Card Payment:</h2>
         <CardElement />
+        <Text>
+          For testing purposes use:
+          <br /> [4242 4242 4242 4242] [any future date] [424] [42424]
+        </Text>
         <Button
           disabled={isProcessingPayment}
           buttonType={BUTTON_TYPE_CLASSES.inverted}

@@ -12,3 +12,7 @@ export const FormContainer = styled.form`
   height: 100px;
   min-width: 500px;
 `;
+
+export const Text = styled.div`
+  margin: 40px 0;
+`;
