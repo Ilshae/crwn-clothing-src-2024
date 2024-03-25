@@ -67,6 +67,7 @@ const SignIn = () => {
           value={email}
           onChange={(event) => handleChange(event)}
           error={errors.email}
+          dataCy={"sign-up-email"}
         />
         <FormInput
           label={"Password"}
@@ -76,6 +77,7 @@ const SignIn = () => {
           value={password}
           onChange={(event) => handleChange(event)}
           error={errors.password}
+          dataCy={"sign-up-password"}
         />
 
         <ButtonContainer>

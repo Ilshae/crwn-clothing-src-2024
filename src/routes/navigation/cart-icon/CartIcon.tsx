@@ -15,7 +15,7 @@ const CartIcon: FC = () => {
   const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
 
   return (
-    <Container onClick={toggleIsCartOpen}>
+    <Container onClick={toggleIsCartOpen} data-cy={"cart-toggler"}>
       <ShoppingIcon src={"/shopping-bag.svg"} alt={"cart"} />
       <Count>{cartCount}</Count>
     </Container>

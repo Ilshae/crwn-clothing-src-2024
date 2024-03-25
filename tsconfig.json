@@ -22,7 +22,8 @@
   },
   "include": [
     "src",
-    "**/*.ts",
+    "node_modules/cypress/types/cypress-global-vars.d.ts",
+    "**/*.cy.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

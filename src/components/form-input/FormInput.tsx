@@ -4,12 +4,18 @@ import { Container, ErrorText, Input, Label } from "./FormInputStyles.ts";
 type FormInputProps = {
   label: string;
   error: string;
+  dataCy?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: FC<FormInputProps> = ({ label, error, ...otherProps }) => {
+const FormInput: FC<FormInputProps> = ({
+  label,
+  error,
+  dataCy,
+  ...otherProps
+}) => {
   return (
     <Container>
-      <Input {...otherProps} />
+      <Input data-cy={dataCy} {...otherProps} />
       {label ? (
         <Label
           shrink={Boolean(
