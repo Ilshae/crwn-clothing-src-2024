@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Container = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   max-width: ${({ theme }) => theme.maxWidth};
